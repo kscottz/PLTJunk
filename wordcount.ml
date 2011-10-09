@@ -1,4 +1,4 @@
-# 1 "wordcount.mll"
+# 2 "wordcount.mll"
   type token = EOF | Word of string 
 # 4 "wordcount.ml"
 let __ocaml_lex_tables = {
@@ -109,22 +109,22 @@ let rec token lexbuf =
 and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
   match Lexing.engine __ocaml_lex_tables __ocaml_lex_state lexbuf with
       | 0 ->
-# 4 "wordcount.mll"
+# 5 "wordcount.mll"
       ( EOF )
 # 115 "wordcount.ml"
 
   | 1 ->
 let
-# 5 "wordcount.mll"
+# 6 "wordcount.mll"
                         word
 # 121 "wordcount.ml"
 = Lexing.sub_lexeme lexbuf lexbuf.Lexing.lex_start_pos lexbuf.Lexing.lex_curr_pos in
-# 5 "wordcount.mll"
+# 6 "wordcount.mll"
                              ( Word(word) )
 # 125 "wordcount.ml"
 
   | 2 ->
-# 6 "wordcount.mll"
+# 7 "wordcount.mll"
     ( token lexbuf )
 # 130 "wordcount.ml"
 
@@ -132,16 +132,46 @@ let
 
 ;;
 
-# 8 "wordcount.mll"
- 
-let lexbuf = Lexing.from_channel stdin in
-let wordlist =
-  let rec next l =
-    match token lexbuf with
-      EOF -> l
-    | Word(s) -> next (s :: l)
-  in next []
-in
-List.iter print_endline wordlist
+# 9 "wordcount.mll"
+     
 
-# 148 "wordcount.ml"
+let module StringMap = Map.Make(String) in
+ 
+   let rec list2Map myList myMap =
+   match myList with 
+   [] -> myMap
+   | hd::tl ->  
+   if StringMap.mem hd myMap then
+   list2Map tl (StringMap.add hd ((StringMap.find hd myMap)+1) myMap)
+   else
+   list2Map tl (StringMap.add hd 1 myMap) in
+   
+   let tupleize k v myList = 
+   myList@[(v,k)] in
+   
+   let sorter a b =
+   if snd a > snd b then -1
+   else if snd a < snd b then 1
+   else 0
+   in
+   
+   let wordcount wc = List.sort (fun (c1, _) (c2, _) -> Pervasives.compare c2 c1) wc
+   in
+
+   let remapList wordlist = 
+   wordcount (StringMap.fold tupleize (list2Map wordlist StringMap.empty))
+   in
+  
+   let lexbuf = Lexing.from_channel stdin in
+   let wordlist =
+   let rec next l =
+   match token lexbuf with
+   EOF -> l
+   | Word(s) -> next (s :: l)
+   in next []
+   in
+   
+   List.iter print_endline wordlist
+
+
+# 178 "wordcount.ml"
