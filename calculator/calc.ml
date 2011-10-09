@@ -3,11 +3,11 @@ open Ast
 let rec eval state = function 
     Lit(x) -> x
   | Var(x) -> state.(x) (*do the lookup*)
-  | Asn(i,e1) ->
+  | Seq(e1,e2) ->
+      (eval state e1)
+  | Asn(i,e1) -> 
       let v = eval state e1 in
       state.(i) <- v
-  | Seq(e1,e2) ->
-      eval state e1
   | Binop(e1, op, e2) ->
       let v1 = eval state e1 and v2 = eval state e2 in
       match op with
