@@ -134,7 +134,6 @@ let
 
 # 9 "wordcount.mll"
      
-
 let module StringMap = Map.Make(String) in
  
    let rec list2Map myList myMap =
@@ -149,17 +148,11 @@ let module StringMap = Map.Make(String) in
    let tupleize k v myList = 
    myList@[(v,k)] in
    
-   let sorter a b =
-   if snd a > snd b then -1
-   else if snd a < snd b then 1
-   else 0
-   in
-   
    let wordcount wc = List.sort (fun (c1, _) (c2, _) -> Pervasives.compare c2 c1) wc
    in
 
    let remapList wordlist = 
-   wordcount (StringMap.fold tupleize (list2Map wordlist StringMap.empty))
+   (wordcount (StringMap.fold tupleize (list2Map wordlist StringMap.empty)))
    in
   
    let lexbuf = Lexing.from_channel stdin in
@@ -171,7 +164,6 @@ let module StringMap = Map.Make(String) in
    in next []
    in
    
-   List.iter print_endline wordlist
+   StringMap.iter print_endline (remapList wordlist)
 
-
-# 178 "wordcount.ml"
+# 170 "wordcount.ml"
