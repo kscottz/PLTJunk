@@ -1,10 +1,17 @@
+(*KATHERINE A SCOTT*)
+(*KAS2221@COLUMBIA.EDU*)
+(*10/12/2011*)
+(*PLT HW1*)
+(*PROBLEM 2*)
+(*********************************************************************************)
+
 open Ast
 
 let rec eval state = function 
     Lit(x) -> x
   | Var(x) -> state.(x) (*do the lookup*)
-  | Seq(e1,e2) -> eval state e1; eval state e2
-  | Asn(x,e1) -> state.(x)<-eval state e1
+  | Seq(e1,e2) -> if (eval state e1) =  0 then eval state e2 else 0
+  | Asn(x,e1) -> state.(x)<-eval state e1; 0
   | Binop(e1, op, e2) ->
       let v1 = eval state e1 and v2 = eval state e2 in
       match op with

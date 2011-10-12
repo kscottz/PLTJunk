@@ -1,3 +1,10 @@
+(*KATHERINE A SCOTT*)
+(*KAS2221@COLUMBIA.EDU*)
+(*10/12/2011*)
+(*PLT HW1*)
+(*PROBLEM 3 - HW 1 - scanner.mll*)
+(*********************************************************************************)
+
 { open Parser }
 
 rule token = parse
