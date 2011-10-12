@@ -1,10 +1,3 @@
-(*KATHERINE A SCOTT*)
-(*KAS2221@COLUMBIA.EDU*)
-(*10/12/2011*)
-(*PLT HW1*)
-(*PROBLEM 3 - Parser.mly*)
-(*********************************************************************************)
-
 %{ open Ast %}
 
 %token PLUS MINUS TIMES DIVIDE ASSIGN ENDSTMNT EOF
