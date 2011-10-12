@@ -1,4 +1,4 @@
-
+(*KATHERINE SCOTT - KAS2221@COLUMBIA.EDU PLT HW 1 *)
 { type token = EOF | Word of string }
 
 rule token = parse
@@ -9,6 +9,7 @@ rule token = parse
 {    
 let module StringMap = Map.Make(String) in
  
+   (* take a list and build a map of the word counts *)
    let rec list2Map myList myMap =
    match myList with 
    [] -> myMap
@@ -19,19 +20,23 @@ let module StringMap = Map.Make(String) in
    list2Map tl (StringMap.add hd 1 myMap) 
    in
    
+   (* make a list of tuples from map values *)
    let tupleize k v myList = 
    myList@[(v,k)] 
    in
    
+   (* the sort function we were given *)
    let wordcount wc = 
    List.sort (fun (c1, _) (c2, _) -> Pervasives.compare c2 c1) wc
    in
 
+   (* fold the map into a tuple list and sort it *)
    let remapList wordlist =
    let c = (StringMap.fold tupleize (list2Map wordlist StringMap.empty)) []  in
    (wordcount c) 
    in
    
+   (* this is annoying recursively go down the tuple list and convert it to a list of strings*)
    let strip myTupleList =
    let rec strip_in myTupleList myList = 
    match myTupleList with
@@ -49,6 +54,6 @@ let module StringMap = Map.Make(String) in
    in next []
    in
    
-   
+   (*run the darn thing*)
    List.iter print_endline (strip (remapList wordlist))
 }
