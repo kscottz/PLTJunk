@@ -4,10 +4,11 @@
 %token <int> LITERAL
 %token <int> VARIABLE
 
+
+%left ENDSTMNT
+%left ASSIGN
 %left PLUS MINUS
 %left TIMES DIVIDE
-%left ASSIGN
-%left ENDSTMNT
 
 %start expr
 %type < Ast.expr> expr
