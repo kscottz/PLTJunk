@@ -8,7 +8,7 @@ let rec uniq l =
   match l with
     [] -> [] 
   | x::y::rest -> 
-      if (x == y) then ([x]@(uniq rest))
+      if (x == y) then (uniq ([x]@rest))
       else ([x]@(uniq ([y]@rest)))
   | x::[] -> [x];;
 
