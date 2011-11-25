@@ -1,0 +1,36 @@
+One sheet of notes double sided
+No programming
+70 Minutes
+Comprehensive
+No C/C++/O'Caml/yacc/etc
+-----
+Structure of a Compiler
+Scanning
+	Language and Regex (scanner parser AST
+	NFA
+	Translating RE to NFA
+	DFA from NFA (subset)
+Parsing
+	Resolving ambiguity
+Rightmost / Reverse Rightmost
+	  LR(0)
+	  SLR Parsing Table
+	  Shift Reduce
+
+HANDLE is always on the right most side of production rule
+TERMINALS IN BOLD
+
+KNOW HOW TO DO SHIFT REDUCE PARSING WITH SLR TABLE
+$ = end of input
+Grammar:
+	Context free
+	Terminals on right - non-terminal on left
+
+A language is ambiguous if it has more than one right most derivation.
+DFA -> NFA upper bound is 2^N
+
+KNOW HOW STACK LAID OUT
+KNOW HOW ACTIVATION RECORDS ARE LAID OUT
+	  KNOW THE NESTED FUNCTION WITH STATIC LINKS EXAMPLE
+
+STATIC VERSUS DYNAMIC SCOPE
